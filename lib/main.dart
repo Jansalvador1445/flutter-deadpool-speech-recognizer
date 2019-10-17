@@ -51,25 +51,78 @@ class BodyState extends State<Body>{
       body: _buildBody(),
     );
   }
-}
 
-Widget _buildBody(){
-  return Container(
-    child: Column(
+  Widget _buildBody(){
+    return Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            _rowWidget(),
+            _textLabelResult(),
+          ],
+        )
+    );
+  }
+
+  Widget _rowWidget(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center ,
       children: <Widget>[
-        _floatingButton(),
+        _floatingButtonStop(),
+        _floatingButtonMic(),
+        _floatingButtonCancel(),
       ],
-    )
-  );
-}
+    );
+  }
 
-Widget _floatingButton(){
-  return FloatingActionButton(
-    onPressed: (){
-      resText = "Clicked";
-      print(resText + "haha");
-    },
-  );
+  Widget _floatingButtonMic(){
+    return FloatingActionButton(
+      child: Icon(Icons.mic),
+      onPressed: (){
+        if(_isAvailable && !_isListening){
+          _speechRecognition.listen(locale: "en_US").then((result) => print('$result'));
+        }
+      },
+    );
+  }
+
+  Widget _floatingButtonStop(){
+    return FloatingActionButton(
+      child: Icon(Icons.stop),
+      mini: true,
+      onPressed: (){
+        if(_isListening){
+          _speechRecognition.stop().then((result) => setState(() => _isListening = result));
+        }
+      },
+    );
+  }
+
+  Widget _floatingButtonCancel(){
+    return FloatingActionButton(
+      child: Icon(Icons.cancel),
+      mini: true,
+      onPressed: (){
+        if(_isListening){
+          _speechRecognition.cancel().then((result) => setState((){
+              _isListening = result;
+              result = "";
+            }),
+          );
+        }
+      },
+    );
+  }
+
+  Widget _textLabelResult(){
+    return Container(
+      padding: EdgeInsets.all(20),
+      margin: EdgeInsets.all(10),
+      child: Text(resText),
+    );
+  }
+
 }
 
 
