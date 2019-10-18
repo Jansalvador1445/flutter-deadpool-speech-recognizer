@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
       title: 'flutter-speech-recognition',
 //      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Color(0xff1abc9c),
-        backgroundColor: Color(0xff2c3e50),
+        primaryColor: Color(0xff8b2323),
+        backgroundColor: Color(0xff292929),
       ),
       home: Body()
     );
@@ -49,13 +49,13 @@ class BodyState extends State<Body>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Text Recognition',
+        title: Text('Speech Recognition',
           style: TextStyle(
             color: Colors.white
           ),
         ),
       ),
-      backgroundColor: Color(0xff2c3e50),
+      backgroundColor: Color(0xff171717),
       body: _buildBody(),
     );
   }
@@ -119,6 +119,7 @@ class BodyState extends State<Body>{
   Widget _floatingButtonMic(){
     return FloatingActionButton(
       child: Icon(Icons.mic),
+      backgroundColor: Color(0xff8b2323),
       onPressed: (){
         if(_isAvailable && !_isListening){
           _speechRecognition.listen(locale: "en_US").then((result) => print('$result'));
@@ -130,6 +131,7 @@ class BodyState extends State<Body>{
   Widget _floatingButtonStop(){
     return FloatingActionButton(
       child: Icon(Icons.stop),
+      backgroundColor: Color(0xff8b1a1a),
       mini: true,
       onPressed: (){
         if(_isListening){
@@ -142,6 +144,7 @@ class BodyState extends State<Body>{
   Widget _floatingButtonCancel(){
     return FloatingActionButton(
       child: Icon(Icons.cancel),
+      backgroundColor: Color(0xff8b1a1a),
       mini: true,
       onPressed: (){
         if(_isListening){
