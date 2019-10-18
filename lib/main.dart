@@ -168,7 +168,7 @@ class BodyState extends State<Body>{
           borderSide: BorderSide(color: Colors.white),
           onPressed: (){
             setState(() {
-              resText = "I'm Deadpool!";
+              resText = "";
             });
           },
         )
